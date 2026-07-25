@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://refinancecalctool.org/tools/break-even-calculator.html">
+<link rel="stylesheet" href="../style.css">
+<title>Break-Even Calculator | Refinance Calc Tool</title>
+<meta name="description" content="Calculate how long it takes for your refinance savings to cover the closing costs. Know your break-even point before you apply.">
+<meta property="og:title" content="Break-Even Calculator | Refinance Calc Tool">
+<meta property="og:description" content="Calculate how long it takes for your refinance savings to cover the closing costs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refinancecalctool.org/tools/break-even-calculator.html">
+<meta property="og:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Break-Even Calculator | Refinance Calc Tool">
+<meta name="twitter:description" content="Calculate how long it takes for your refinance savings to cover the closing costs.">
+<meta name="twitter:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Break-Even Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://refinancecalctool.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://refinancecalctool.org/tools/index.html"},
+    {"@type": "ListItem", "position": 3, "name": "Break-Even Calculator", "item": "https://refinancecalctool.org/tools/break-even-calculator.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="rfc-nav">
+  <div class="rfc-nav-inner">
+    <a href="../index.html" class="rfc-nav-logo">Refinance<span>Calc</span>Tool</a>
+    <button class="rfc-nav-toggle" onclick="document.querySelector('.rfc-nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="rfc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html" class="active">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="rfc-section">
+  <div class="rfc-container">
+    <div class="rfc-breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <a href="./index.html">Tools</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <span>Break-Even Calculator</span>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_top">Advertisement</div>
+
+    <h1 class="rfc-h1" style="margin-bottom:8px;">Break-Even Calculator</h1>
+    <p class="rfc-lead" style="margin-bottom:32px;">How many months until your refinance savings pay for the closing costs? Find out in seconds.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:32px;">
+      <div class="rfc-tool-page">
+        <div class="rfc-tool-input-group">
+          <label>Current Monthly Payment ($)</label>
+          <input type="number" id="beCurrPayment" placeholder="1950" value="1950">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>New Monthly Payment ($)</label>
+          <input type="number" id="beNewPayment" placeholder="1910" value="1910">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Total Closing Costs ($)</label>
+          <input type="number" id="beClosing" placeholder="5000" value="5000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Monthly Savings from Rate Drop ($)</label>
+          <input type="number" id="beRateSavings" placeholder="0" value="0">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Monthly PMI Savings ($)</label>
+          <input type="number" id="bePmiSavings" placeholder="0" value="0">
+        </div>
+
+        <div class="rfc-tool-actions">
+          <button class="rfc-btn rfc-btn-primary" onclick="calcBreakEven()">Calculate Break-Even</button>
+          <button class="rfc-btn rfc-btn-outline" onclick="resetBreakEven()">Reset</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="rfc-tool-result-box" id="beResult" style="display:none;text-align:center;padding:48px;">
+          <div style="font-size:4rem;font-weight:800;color:var(--rfc-primary);line-height:1;margin-bottom:16px;" id="beMonths">0</div>
+          <div style="font-size:1.25rem;color:var(--rfc-text-light);margin-bottom:24px;">months to break even</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px;">
+            <div>
+              <div style="font-size:0.875rem;color:var(--rfc-text-muted);">Monthly Savings</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--rfc-success);" id="beMonthlySave">$0</div>
+            </div>
+            <div>
+              <div style="font-size:0.875rem;color:var(--rfc-text-muted);">Total Closing Costs</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--rfc-text);" id="beTotalCost">$0</div>
+            </div>
+            <div>
+              <div style="font-size:0.875rem;color:var(--rfc-text-muted);">5-Year Net Savings</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--rfc-primary);" id="be5Year">$0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rfc-tool-chart-area" id="beChartArea" style="display:none;">
+          <h4 style="margin-bottom:16px;">Cumulative Savings Over Time</h4>
+          <canvas id="beChart" width="500" height="280"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_bottom">Advertisement</div>
+
+    <div style="margin-top:48px;">
+      <h3 class="rfc-h3">How It Works</h3>
+      <div class="rfc-article-body" style="margin-top:16px;">
+        <h4>Calculation Logic</h4>
+        <p>The break-even point is found by dividing your total closing costs by your total monthly savings. Monthly savings include the difference between your old and new payment, plus any PMI savings and rate-drop savings. The cumulative savings chart shows exactly when your savings line crosses your costs line.</p>
+        <h4>How to Use</h4>
+        <ul>
+          <li>Enter your current monthly payment and your expected new payment after refinancing.</li>
+          <li>Add your total closing costs (or estimate with our Closing Cost Estimator).</li>
+          <li>If refinancing removes PMI, add that monthly savings.</li>
+          <li>If your rate drop creates additional savings beyond the payment change, include that too.</li>
+          <li>Click <strong>Calculate Break-Even</strong> to see the months to break-even and 5-year net savings.</li>
+        </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li><strong>Do not forget PMI:</strong> Removing PMI can shave 10–20 months off your break-even point.</li>
+          <li><strong>The 5-year test:</strong> If you plan to move within 5 years, make sure your 5-year net savings are positive.</li>
+          <li><strong>Closing costs are negotiable:</strong> Some lenders offer credits. Lower closing costs = faster break-even.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div style="margin-top:48px;">
+      <div class="rfc-ad-slot has-content" id="tool_detail_middle">Advertisement</div>
+
+    <h3 class="rfc-h3">Related Articles</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="../blog/calculate-refinance-break-even.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">How to Calculate Break-Even Point</div>
+            <div class="rfc-article-card-excerpt">Step-by-step guide to finding your refinance break-even.</div>
+          </div>
+        </a>
+        <a href="../blog/mark-saved-28000-refinancing.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Mark's $28,000 Refinance Story</div>
+            <div class="rfc-article-card-excerpt">How one homeowner found the right timing in 2026.</div>
+          </div>
+        </a>
+        <a href="../blog/no-closing-cost-refinance-math.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">No-Closing-Cost Refinance Math</div>
+            <div class="rfc-article-card-excerpt">Understanding the true cost of zero-fee offers.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="rfc-footer">
+  <div class="rfc-footer-inner">
+    <div class="rfc-footer-grid">
+      <div>
+        <div class="rfc-footer-brand">Refinance<span>Calc</span>Tool</div>
+        <p class="rfc-footer-desc">Smart mortgage refinance calculators and expert guidance.</p>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Tools</div>
+        <ul class="rfc-footer-links">
+          <li><a href="./refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="./break-even-calculator.html">Break-Even Calculator</a></li>
+          <li><a href="./closing-cost-estimator.html">Closing Cost Estimator</a></li>
+          <li><a href="./cash-out-calculator.html">Cash-Out Calculator</a></li>
+          <li><a href="./rate-comparison.html">Rate Comparison</a></li>
+          <li><a href="./pmi-calculator.html">PMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Resources</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../faq.html">FAQ</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Legal</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+          <li><a href="../disclaimer.html">Disclaimer</a></li>
+          <li><a href="../disclosure.html">Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rfc-footer-bottom">
+      <span>&copy; 2026 Refinance Calc Tool. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+
+function rfcSaveBEState() {
+  var state = {
+    currPayment: document.getElementById('beCurrPayment').value,
+    newPayment: document.getElementById('beNewPayment').value,
+    closing: document.getElementById('beClosing').value,
+    rateSavings: document.getElementById('beRateSavings').value,
+    pmiSavings: document.getElementById('bePmiSavings').value
+  };
+  localStorage.setItem('rfcBEState', JSON.stringify(state));
+}
+
+function rfcLoadBEState() {
+  var state = JSON.parse(localStorage.getItem('rfcBEState') || '{}');
+  if (state.currPayment !== undefined) document.getElementById('beCurrPayment').value = state.currPayment;
+  if (state.newPayment !== undefined) document.getElementById('beNewPayment').value = state.newPayment;
+  if (state.closing !== undefined) document.getElementById('beClosing').value = state.closing;
+  if (state.rateSavings !== undefined) document.getElementById('beRateSavings').value = state.rateSavings;
+  if (state.pmiSavings !== undefined) document.getElementById('bePmiSavings').value = state.pmiSavings;
+}
+function calcBreakEven() {
+  rfcSaveBEState();
+  const curr = parseFloat(document.getElementById('beCurrPayment').value) || 0;
+  const newp = parseFloat(document.getElementById('beNewPayment').value) || 0;
+  const closing = parseFloat(document.getElementById('beClosing').value) || 0;
+  const rateSave = parseFloat(document.getElementById('beRateSavings').value) || 0;
+  const pmiSave = parseFloat(document.getElementById('bePmiSavings').value) || 0;
+
+  const monthlySave = (curr - newp) + rateSave + pmiSave;
+  const months = monthlySave > 0 ? Math.ceil(closing / monthlySave) : 0;
+  const fiveYear = monthlySave * 60 - closing;
+
+  document.getElementById('beMonths').textContent = months > 0 ? months : 'N/A';
+  document.getElementById('beMonthlySave').textContent = '$' + monthlySave.toFixed(0);
+  document.getElementById('beTotalCost').textContent = '$' + closing.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('be5Year').textContent = '$' + fiveYear.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('be5Year').style.color = fiveYear >= 0 ? 'var(--rfc-success)' : 'var(--rfc-danger)';
+
+  document.getElementById('beResult').style.display = 'block';
+  document.getElementById('beChartArea').style.display = 'block';
+
+  drawBeChart(months, monthlySave, closing);
+}
+
+function drawBeChart(breakEvenMonths, monthlySave, closing) {
+  const canvas = document.getElementById('beChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const months = 60;
+  const maxY = Math.max(closing, monthlySave * months) * 1.2;
+  const pad = 40;
+  const w = canvas.width - pad * 2;
+  const h = canvas.height - pad * 2;
+
+  // Axes
+  ctx.strokeStyle = '#dfe6e9';
+  ctx.beginPath();
+  ctx.moveTo(pad, pad);
+  ctx.lineTo(pad, canvas.height - pad);
+  ctx.lineTo(canvas.width - pad, canvas.height - pad);
+  ctx.stroke();
+
+  // Break-even line
+  ctx.strokeStyle = '#e76f51';
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  const beX = pad + (breakEvenMonths / months) * w;
+  ctx.moveTo(beX, pad);
+  ctx.lineTo(beX, canvas.height - pad);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#e76f51';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('Break-Even', beX + 5, pad + 15);
+
+  // Cost line (flat)
+  ctx.strokeStyle = '#b2bec3';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(pad, canvas.height - pad - (closing / maxY) * h);
+  ctx.lineTo(canvas.width - pad, canvas.height - pad - (closing / maxY) * h);
+  ctx.stroke();
+
+  // Savings line (growing)
+  ctx.strokeStyle = '#1a5f7a';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(pad, canvas.height - pad);
+  for (let m = 1; m <= months; m++) {
+    const x = pad + (m / months) * w;
+    const y = canvas.height - pad - (monthlySave * m / maxY) * h;
+    ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = '#636e72';
+  ctx.font = '11px sans-serif';
+  ctx.fillText('0', pad - 15, canvas.height - pad + 15);
+  ctx.fillText('5 years', canvas.width - pad - 30, canvas.height - pad + 15);
+  ctx.fillText('Savings', canvas.width - pad - 50, pad + 10);
+  ctx.fillText('Costs', pad + 5, canvas.height - pad - (closing / maxY) * h - 5);
+}
+
+function resetBreakEven() {
+  localStorage.removeItem('rfcBEState');
+  document.getElementById('beCurrPayment').value = '1950';
+  document.getElementById('beNewPayment').value = '1910';
+  document.getElementById('beClosing').value = '5000';
+  document.getElementById('beRateSavings').value = '0';
+  document.getElementById('bePmiSavings').value = '0';
+  document.getElementById('beResult').style.display = 'none';
+  document.getElementById('beChartArea').style.display = 'none';
+}
+rfcLoadBEState();
+</script>
+</body>
+</html>
