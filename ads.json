@@ -1,0 +1,257 @@
+{
+  "slots": [
+    {
+      "name": "hero_top",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "middle",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "footer",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "tool_top",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "tool_middle",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "tool_bottom",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "article_top",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "article_middle",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "article_bottom",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_top",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_1",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_2",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_3",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_4",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_5",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_6",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_7",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_8",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_9",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_10",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_11",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_12",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_13",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_14",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_15",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_16",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_17",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_18",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_19",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_20",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_21",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_22",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_23",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_24",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_25",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_26",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_27",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_28",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_29",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_mid_30",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "blog_bottom",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    },
+    {
+      "name": "about_bottom",
+      "width": "100%",
+      "height": 250,
+      "enabled": true
+    }
+  ],
+  "enabled": true
+}
