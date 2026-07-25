@@ -1,0 +1,47 @@
+# refinancecalctool
+
+Free online calculators and educational content. Not professional advice.
+
+## Pages
+- Home: https://refinancecalctool.org/
+- Tools: https://refinancecalctool.org/tools/
+- Blog: https://refinancecalctool.org/blog/
+- About: https://refinancecalctool.org/about.html
+- Contact: https://refinancecalctool.org/contact.html
+- FAQ: https://refinancecalctool.org/faq.html
+- Sitemap: https://refinancecalctool.org/sitemap.html
+
+## Tools
+- Break-Even Calculator | Refinance Calc Tool: https://refinancecalctool.org/tools/break-even-calculator.html
+- Cash-Out Calculator | Refinance Calc Tool: https://refinancecalctool.org/tools/cash-out-calculator.html
+- Closing Cost Estimator | Refinance Calc Tool: https://refinancecalctool.org/tools/closing-cost-estimator.html
+- PMI Calculator | Refinance Calc Tool: https://refinancecalctool.org/tools/pmi-calculator.html
+- Rate Comparison | Refinance Calc Tool: https://refinancecalctool.org/tools/rate-comparison.html
+- Refinance Calculator | Refinance Calc Tool: https://refinancecalctool.org/tools/refinance-calculator.html
+
+## Articles
+- Cash Out Refinance Dangers 2026 Equity (cash-out-refinance-dangers-2026-equity) -- My neighbor cashed out $80,000 in equity last year. His kitchen looks amazing. Granite countertops. Custom cabinets. A six-burner range that would make a chef weep. His balance sheet? Less amazing. He -- July 25, 2026
+- Denver Refinance Climate Insurance Trap (denver-refinance-climate-insurance-trap) -- Why My Refinance Calculator Said I'd Save $200 a Month—Then the Insurance Killed It Marcus Thompson I was sitting at my kitchen table in March, looking at the refinance calculator on my bank's website -- July 06, 2026
+- Refinancing Cost Six Thousand Hidden Fees (refinancing-cost-six-thousand-hidden-fees) -- The closing disclosure arrived by email at 4:47 PM on a Friday, which I now realize was strategic timing. I was tired. I was eager to sign. And I was staring at a document that said my refinance — the -- July 06, 2026
+- Why Did My Refinance Save Me 200 (why-did-my-refinance-save-me-200) -- Why Did My Refinance Save Me $200 a Month but Cost Me $18,000? Why did my refinance save me $200 a month but cost me $18,000? I asked myself that question at 2 AM last Tuesday, sitting at my kitchen t -- June 24, 2026
+- The Refinance That Saved Me 400 A Month And Almost Cost Me My House (the-refinance-that-saved-me-400-a-month-and-almost-cost-me-my-house) -- The Refinance That Saved Me $400 a Month and Almost Cost Me My House I signed the refinance documents at the title company on Lincoln Street at 10:00 AM on a Thursday. The notary — a woman named Helen -- June 23, 2026
+- 2026 Mortgage Rate Forecast: What the Fed and Iran Mean for Your Loan | Refinance Calc Tool (2026-mortgage-rate-forecast) -- Nobody knows where mortgage rates are going. Let’s get that out of the way. -- June 13, 2026
+- The Hidden Cost of Skipping the Appraisal | Refinance Calc Tool (hidden-cost-skipping-appraisal) -- “Do I really need an appraisal?” -- June 13, 2026
+- LTV Explained: Why Your Equity Percentage Changes Everything | Refinance Calc Tool (ltv-explained-equity) -- Loan‑to‑value. LTV. Two acronyms that sound like alphabet soup but actually control your financial life as a homeowner. -- June 13, 2026
+- Mortgage Points: Buy Now or Save Later? | Refinance Calc Tool (mortgage-points-buy-now-save-later) -- “Should I buy points to lower my rate?” -- June 13, 2026
+- PMI and Refinancing: When You Can Finally Drop It | Refinance Calc Tool (pmi-refinancing-when-drop-it) -- Private mortgage insurance. PMI. The monthly fee that feels like throwing money into a shredder. -- June 13, 2026
+- Refinance Timeline: How Long It Really Takes in 2026 | Refinance Calc Tool (refinance-timeline-2026) -- Day 1: You apply for a refinance. Day 45: You close. Or maybe day 60. Or maybe day 90. -- June 13, 2026
+- Cash-Out Refinance vs. Home Equity Loan: The Smart Borrower's Guide | Refinance Calc Tool (cash-out-refinance-vs-home-equity) -- “Should I do a cash‑out refinance or a home equity loan?” -- June 12, 2026
+- Closing Costs Decoded: Where Every Dollar Goes | Refinance Calc Tool (closing-costs-decoded) -- “I paid $6,000 in closing costs. I have no idea what I paid for.” -- June 12, 2026
+- Credit Score Tiers and Refinance Rates: What the Numbers Actually Mean | Refinance Calc Tool (credit-score-tiers-refinance-rates) -- “I have a 710 credit score. Is that good enough to refinance?” -- June 12, 2026
+- Fixed Rate vs. ARM: Which Refinance Option Fits Your Life Stage? | Refinance Calc Tool (fixed-rate-vs-arm-refinance) -- “Should I take the lower ARM rate or lock in the fixed rate?” -- June 12, 2026
+- No-Closing-Cost Refinance: The Math Behind the Marketing | Refinance Calc Tool (no-closing-cost-refinance-math) -- “No closing costs!” -- June 12, 2026
+- Rate Lock Strategy: When to Pull the Trigger in a Volatile Market | Refinance Calc Tool (rate-lock-strategy-volatile-market) -- I locked a rate too early once. It cost me $3,200. -- June 12, 2026
+- “We Almost Didn’t Bother”: The $15,000 Mistake That Changed Everything | Refinance Calc Tool (15000-mistake-changed-everything) -- “We almost didn’t bother.” -- June 11, 2026
+- 30-Year vs. 15-Year Refinance: A Side-by-Side Cost Analysis | Refinance Calc Tool (30-year-vs-15-year-refinance) -- Dear homeowners who can’t decide between a 30‑year and a 15‑year refinance, -- June 11, 2026
+- The Break-Even Gamble: One Family's Refinance Decision in Uncertain Times | Refinance Calc Tool (break-even-gamble-family) -- “What if rates drop next month?” -- June 11, 2026
+- How to Calculate Your Refinance Break‑Even Point in 2026 | Refinance Calc Tool (calculate-refinance-break-even) -- Here’s a number that most refinance ads don’t show you: the break‑even point. -- June 11, 2026
+- From 7.2% to 6.4%: Sarah's 90-Day Refinance Journey | Refinance Calc Tool (sarah-90-day-refinance-journey) -- Sarah called me in March 2026, frustrated and tired. Her adjustable-rate mortgage had just reset from 4.2% to 7.2%. Her monthly payment jumped from $1,450 to... -- June 11, 2026
+- Self-Employed and Skeptical: How James Proved the Banks Wrong | Refinance Calc Tool (self-employed-refinance-success) -- “They told me self-employed people can't refinance unless we have two years of profit.” -- June 11, 2026
+- The 2021 Rate Trap: What Happens When Your 2.8% Fixed Rate Expires | Refinance Calc Tool (2021-rate-trap-expires) -- Here's a number you're going to see a lot in 2026: 2.8%. -- June 10, 2026
+- “I Thought I Missed the Boat”: How Mark Saved $28,000 by Refinancing in June 2026 | Refinance Calc Tool (mark-saved-28000-refinancing) -- “I thought I missed the boat.” -- June 10, 2026
