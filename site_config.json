@@ -1,0 +1,23 @@
+{
+  "domain": "refinancecalctool.org",
+  "site_name": "Refinance Calc Tool",
+  "tagline": "Smart Mortgage Refinance Calculators & Expert Guidance",
+  "language": "en",
+  "charset": "UTF-8",
+  "author": "Michael Harrington",
+  "author_email": "contact@refinancecalctool.org",
+  "favicon": "favicon.ico",
+  "logo": "images/logo.png",
+  "theme_color": "#1a5f7a",
+  "css_prefix": "rfc",
+  "social": {
+    "twitter": "https://twitter.com/refinancecalctool",
+    "linkedin": "https://linkedin.com/in/michaelharringtonfinance"
+  },
+  "analytics": {
+    "gtag": "G-XXXXXXXXXX"
+  },
+  "ads_enabled": true,
+  "created_date": "2026-06-09",
+  "last_updated": "2026-06-09"
+}
