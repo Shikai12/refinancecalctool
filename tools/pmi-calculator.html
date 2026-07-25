@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://refinancecalctool.org/tools/pmi-calculator.html">
+<link rel="stylesheet" href="../style.css">
+<title>PMI Calculator | Refinance Calc Tool</title>
+<meta name="description" content="Calculate your PMI costs and find out when you can drop private mortgage insurance by refinancing or reaching 20% equity.">
+<meta property="og:title" content="PMI Calculator | Refinance Calc Tool">
+<meta property="og:description" content="Calculate your PMI costs and find out when you can drop private mortgage insurance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refinancecalctool.org/tools/pmi-calculator.html">
+<meta property="og:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PMI Calculator | Refinance Calc Tool">
+<meta name="twitter:description" content="Calculate your PMI costs and find out when you can drop private mortgage insurance.">
+<meta name="twitter:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PMI Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://refinancecalctool.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://refinancecalctool.org/tools/index.html"},
+    {"@type": "ListItem", "position": 3, "name": "PMI Calculator", "item": "https://refinancecalctool.org/tools/pmi-calculator.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="rfc-nav">
+  <div class="rfc-nav-inner">
+    <a href="../index.html" class="rfc-nav-logo">Refinance<span>Calc</span>Tool</a>
+    <button class="rfc-nav-toggle" onclick="document.querySelector('.rfc-nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="rfc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html" class="active">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="rfc-section">
+  <div class="rfc-container">
+    <div class="rfc-breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <a href="./index.html">Tools</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <span>PMI Calculator</span>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_top">Advertisement</div>
+
+    <h1 class="rfc-h1" style="margin-bottom:8px;">PMI Calculator</h1>
+    <p class="rfc-lead" style="margin-bottom:32px;">See how much PMI is costing you and when you can drop it through refinancing or natural equity growth.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div class="rfc-tool-page">
+        <div class="rfc-tool-input-group">
+          <label>Home Value ($)</label>
+          <input type="number" id="pmiValue" placeholder="400000" value="400000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Current Loan Balance ($)</label>
+          <input type="number" id="pmiBalance" placeholder="340000" value="340000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Current PMI Monthly ($)</label>
+          <input type="number" id="pmiMonthly" placeholder="280" value="280">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Annual Appreciation Rate (%)</label>
+          <input type="number" id="pmiAppreciation" placeholder="3" value="3" step="0.1">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Extra Monthly Principal ($)</label>
+          <input type="number" id="pmiExtra" placeholder="200" value="200">
+        </div>
+
+        <div class="rfc-tool-actions">
+          <button class="rfc-btn rfc-btn-primary" onclick="calcPmi()">Calculate</button>
+          <button class="rfc-btn rfc-btn-outline" onclick="resetPmi()">Reset</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="rfc-tool-result-box" id="pmiResult" style="display:none;">
+          <div style="text-align:center;margin-bottom:24px;">
+            <div class="rfc-tool-result-label">Current LTV</div>
+            <div class="rfc-tool-result-value" id="pmiLtv" style="font-size:2.5rem;">0%</div>
+            <div style="font-size:0.875rem;color:var(--rfc-text-muted);margin-top:4px;" id="pmiLtvStatus">-</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <div class="rfc-tool-result-label">Months Until 80% LTV</div>
+              <div class="rfc-tool-result-value" id="pmiMonths">0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Total PMI Remaining</div>
+              <div class="rfc-tool-result-value" id="pmiTotalRemaining">$0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">PMI Saved by Refinancing</div>
+              <div class="rfc-tool-result-value" id="pmiSaved" style="color:var(--rfc-success);">$0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Equity at Drop Point</div>
+              <div class="rfc-tool-result-value" id="pmiEquity">$0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rfc-tool-chart-area" id="pmiChartArea" style="display:none;">
+          <h4 style="margin-bottom:16px;">LTV Over Time</h4>
+          <canvas id="pmiChart" width="400" height="220"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_bottom">Advertisement</div>
+
+    <div style="margin-top:48px;">
+      <h3 class="rfc-h3">How It Works</h3>
+      <div class="rfc-article-body" style="margin-top:16px;">
+        <h4>Calculation Logic</h4>
+        <p>This calculator tracks your loan-to-value (LTV) ratio over time by simulating monthly principal paydown and home value appreciation. It starts with your current balance and home value, then applies your appreciation rate and any extra principal payments each month until your LTV drops to 80% — the threshold where PMI can be removed. The chart plots your LTV decline against the 80% line.</p>
+        <h4>How to Use</h4>
+        <ul>
+          <li>Enter your current home value and loan balance.</li>
+          <li>Input your current monthly PMI cost.</li>
+          <li>Add your expected annual home appreciation rate (3% is a conservative long-term average).</li>
+          <li>Include any extra monthly principal you pay.</li>
+          <li>Click <strong>Calculate</strong> to see months until 80% LTV, total PMI remaining, and potential savings from refinancing.</li>
+        </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li><strong>Appreciation is the hidden accelerator:</strong> In hot markets, rising home values can drop your LTV faster than principal payments alone.</li>
+          <li><strong>Request an appraisal at 80% LTV:</strong> You do not have to wait for automatic removal. A $500 appraisal can save thousands.</li>
+          <li><strong>Refinancing can remove PMI instantly:</strong> If your current LTV is already below 80%, a refinance eliminates PMI from day one.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div style="margin-top:48px;">
+      <div class="rfc-ad-slot has-content" id="tool_detail_middle">Advertisement</div>
+
+    <h3 class="rfc-h3">Related Articles</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="../blog/pmi-refinancing-when-drop-it.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">PMI and Refinancing</div>
+            <div class="rfc-article-card-excerpt">When you can finally drop PMI.</div>
+          </div>
+        </a>
+        <a href="../blog/ltv-explained-equity.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">LTV Explained</div>
+            <div class="rfc-article-card-excerpt">Why your equity percentage changes everything.</div>
+          </div>
+        </a>
+        <a href="../blog/mark-saved-28000-refinancing.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Mark's Refinance Story</div>
+            <div class="rfc-article-card-excerpt">How dropping PMI factored into the decision.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="rfc-footer">
+  <div class="rfc-footer-inner">
+    <div class="rfc-footer-grid">
+      <div>
+        <div class="rfc-footer-brand">Refinance<span>Calc</span>Tool</div>
+        <p class="rfc-footer-desc">Smart mortgage refinance calculators and expert guidance.</p>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Tools</div>
+        <ul class="rfc-footer-links">
+          <li><a href="./refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="./break-even-calculator.html">Break-Even Calculator</a></li>
+          <li><a href="./closing-cost-estimator.html">Closing Cost Estimator</a></li>
+          <li><a href="./cash-out-calculator.html">Cash-Out Calculator</a></li>
+          <li><a href="./rate-comparison.html">Rate Comparison</a></li>
+          <li><a href="./pmi-calculator.html">PMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Resources</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../faq.html">FAQ</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Legal</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+          <li><a href="../disclaimer.html">Disclaimer</a></li>
+          <li><a href="../disclosure.html">Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rfc-footer-bottom">
+      <span>&copy; 2026 Refinance Calc Tool. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+
+function rfcSavePMIState() {
+  var state = {
+    value: document.getElementById('pmiValue').value,
+    balance: document.getElementById('pmiBalance').value,
+    monthly: document.getElementById('pmiMonthly').value,
+    appreciation: document.getElementById('pmiAppreciation').value,
+    extra: document.getElementById('pmiExtra').value
+  };
+  localStorage.setItem('rfcPMIState', JSON.stringify(state));
+}
+
+function rfcLoadPMIState() {
+  var state = JSON.parse(localStorage.getItem('rfcPMIState') || '{}');
+  if (state.value !== undefined) document.getElementById('pmiValue').value = state.value;
+  if (state.balance !== undefined) document.getElementById('pmiBalance').value = state.balance;
+  if (state.monthly !== undefined) document.getElementById('pmiMonthly').value = state.monthly;
+  if (state.appreciation !== undefined) document.getElementById('pmiAppreciation').value = state.appreciation;
+  if (state.extra !== undefined) document.getElementById('pmiExtra').value = state.extra;
+}
+function calcPmi() {
+  rfcSavePMIState();
+  const value = parseFloat(document.getElementById('pmiValue').value) || 0;
+  const balance = parseFloat(document.getElementById('pmiBalance').value) || 0;
+  const pmiMonthly = parseFloat(document.getElementById('pmiMonthly').value) || 0;
+  const appreciation = parseFloat(document.getElementById('pmiAppreciation').value) || 0;
+  const extra = parseFloat(document.getElementById('pmiExtra').value) || 0;
+
+  const ltv = (balance / value) * 100;
+  const equity = value - balance;
+
+  let months = 0;
+  let currentBalance = balance;
+  let currentValue = value;
+  const monthlyRate = appreciation / 100 / 12;
+  const dataPoints = [];
+
+  while (currentBalance / currentValue > 0.8 && months < 360) {
+    currentValue = currentValue * (1 + monthlyRate);
+    const interest = currentBalance * 0.0475 / 12;
+    const principal = (pmiMonthly * 3) - interest + extra;
+    currentBalance = Math.max(0, currentBalance - principal);
+    months++;
+    if (months % 6 === 0) {
+      dataPoints.push({months: months, ltv: (currentBalance / currentValue) * 100});
+    }
+  }
+
+  const totalRemaining = months * pmiMonthly;
+  const pmiSaved = months > 0 ? pmiMonthly * 12 : 0;
+  const equityAtDrop = currentValue - currentBalance;
+
+  document.getElementById('pmiLtv').textContent = ltv.toFixed(1) + '%';
+  document.getElementById('pmiLtvStatus').textContent = ltv > 80 ? 'PMI Required' : 'No PMI Needed';
+  document.getElementById('pmiLtvStatus').style.color = ltv > 80 ? 'var(--rfc-danger)' : 'var(--rfc-success)';
+  document.getElementById('pmiMonths').textContent = months > 0 && months < 360 ? months + ' months' : 'N/A';
+  document.getElementById('pmiTotalRemaining').textContent = '$' + totalRemaining.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('pmiSaved').textContent = '$' + pmiSaved.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('pmiEquity').textContent = '$' + equityAtDrop.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  document.getElementById('pmiResult').style.display = 'block';
+  document.getElementById('pmiChartArea').style.display = 'block';
+
+  drawPmiChart(dataPoints, ltv);
+}
+
+function drawPmiChart(data, startLtv) {
+  const canvas = document.getElementById('pmiChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const pad = 30;
+  const w = canvas.width - pad * 2;
+  const h = canvas.height - pad * 2;
+
+  // Axes
+  ctx.strokeStyle = '#dfe6e9';
+  ctx.beginPath();
+  ctx.moveTo(pad, pad);
+  ctx.lineTo(pad, canvas.height - pad);
+  ctx.lineTo(canvas.width - pad, canvas.height - pad);
+  ctx.stroke();
+
+  // 80% line
+  ctx.strokeStyle = '#e76f51';
+  ctx.setLineDash([5, 5]);
+  const y80 = canvas.height - pad - ((80 - 40) / (startLtv - 40)) * h;
+  ctx.beginPath();
+  ctx.moveTo(pad, y80);
+  ctx.lineTo(canvas.width - pad, y80);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#e76f51';
+  ctx.font = '11px sans-serif';
+  ctx.fillText('80% LTV (PMI Drop)', pad + 5, y80 - 5);
+
+  // LTV line
+  ctx.strokeStyle = '#1a5f7a';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(pad, canvas.height - pad - ((startLtv - 40) / (startLtv - 40)) * h);
+  data.forEach((d, i) => {
+    const x = pad + ((i + 1) / data.length) * w;
+    const y = canvas.height - pad - ((d.ltv - 40) / (startLtv - 40)) * h;
+    ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  ctx.fillStyle = '#636e72';
+  ctx.font = '10px sans-serif';
+  ctx.fillText('0', pad - 10, canvas.height - pad + 12);
+  ctx.fillText(data.length * 6 + ' mo', canvas.width - pad - 30, canvas.height - pad + 12);
+}
+
+function resetPmi() {
+  localStorage.removeItem('rfcPMIState');
+  document.getElementById('pmiValue').value = '400000';
+  document.getElementById('pmiBalance').value = '340000';
+  document.getElementById('pmiMonthly').value = '280';
+  document.getElementById('pmiAppreciation').value = '3';
+  document.getElementById('pmiExtra').value = '200';
+  document.getElementById('pmiResult').style.display = 'none';
+  document.getElementById('pmiChartArea').style.display = 'none';
+}
+rfcLoadPMIState();
+</script>
+</body>
+</html>
