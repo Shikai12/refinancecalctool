@@ -1,0 +1,53 @@
+name: Auto Update SEO Files
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run build.py
+        run: |
+          set -e
+          python build.py
+          BUILD_EXIT=$?
+          if [ $BUILD_EXIT -ne 0 ]; then
+            echo "::error::build.py failed with exit code $BUILD_EXIT"
+            exit 1
+          fi
+          echo "build.py completed successfully"
+
+      - name: Verify generated files exist
+        run: |
+          for f in sitemap.xml sitemap.html llms.txt robots.txt articles.json site_archive.json; do
+            if [ ! -f "$f" ]; then
+              echo "::warning::Missing file: $f"
+            fi
+          done
+
+      - name: Verify homepage markers
+        run: |
+          grep -q "INDEX_ARTICLES_START" index.html || echo "::warning::index.html markers check"
+          grep -q "BLOG_ARTICLES_START" blog/index.html || echo "::warning::blog/index.html markers check"
+          grep -q "TOOLS_ARTICLES_START" tools/index.html || echo "::warning::tools/index.html markers check"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Auto-update SEO files and homepages [$(date -u +%Y-%m-%d_%H:%M)]"
+          git push
