@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://refinancecalctool.org/tools/cash-out-calculator.html">
+<link rel="stylesheet" href="../style.css">
+<title>Cash-Out Calculator | Refinance Calc Tool</title>
+<meta name="description" content="Calculate how much equity you can access with a cash-out refinance. See new loan amount, LTV, and monthly payment impact.">
+<meta property="og:title" content="Cash-Out Calculator | Refinance Calc Tool">
+<meta property="og:description" content="Calculate how much equity you can access with a cash-out refinance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refinancecalctool.org/tools/cash-out-calculator.html">
+<meta property="og:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cash-Out Calculator | Refinance Calc Tool">
+<meta name="twitter:description" content="Calculate how much equity you can access with a cash-out refinance.">
+<meta name="twitter:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Cash-Out Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://refinancecalctool.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://refinancecalctool.org/tools/index.html"},
+    {"@type": "ListItem", "position": 3, "name": "Cash-Out Calculator", "item": "https://refinancecalctool.org/tools/cash-out-calculator.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="rfc-nav">
+  <div class="rfc-nav-inner">
+    <a href="../index.html" class="rfc-nav-logo">Refinance<span>Calc</span>Tool</a>
+    <button class="rfc-nav-toggle" onclick="document.querySelector('.rfc-nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="rfc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html" class="active">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="rfc-section">
+  <div class="rfc-container">
+    <div class="rfc-breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <a href="./index.html">Tools</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <span>Cash-Out Calculator</span>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_top">Advertisement</div>
+
+    <h1 class="rfc-h1" style="margin-bottom:8px;">Cash-Out Calculator</h1>
+    <p class="rfc-lead" style="margin-bottom:32px;">See how much home equity you can access and what it means for your monthly payment.</p>
+
+    <div class="rfc-tool-page">
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;">
+        <div class="rfc-tool-input-group">
+          <label>Home Value ($)</label>
+          <input type="number" id="coValue" placeholder="450000" value="450000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Current Balance ($)</label>
+          <input type="number" id="coBalance" placeholder="300000" value="300000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Max LTV Allowed (%)</label>
+          <input type="number" id="coLtv" placeholder="80" value="80">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>New Rate (%)</label>
+          <input type="number" id="coRate" placeholder="6.2" value="6.2" step="0.01">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>New Term (Years)</label>
+          <select id="coTerm">
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30" selected>30</option>
+          </select>
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Cash You Want ($)</label>
+          <input type="number" id="coWant" placeholder="50000" value="50000">
+        </div>
+      </div>
+
+      <div class="rfc-tool-actions">
+        <button class="rfc-btn rfc-btn-primary" onclick="calcCashOut()">Calculate</button>
+        <button class="rfc-btn rfc-btn-outline" onclick="resetCashOut()">Reset</button>
+        <button class="rfc-btn rfc-btn-outline" onclick="compareCashOut()">Compare Scenarios</button>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+      <div class="rfc-tool-result-box" id="coResult" style="display:none;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div class="rfc-tool-result-label">Available Equity</div>
+            <div class="rfc-tool-result-value" id="coEquity">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">Max Cash-Out</div>
+            <div class="rfc-tool-result-value" id="coMaxCash">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">New Loan Amount</div>
+            <div class="rfc-tool-result-value" id="coNewLoan">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">New LTV</div>
+            <div class="rfc-tool-result-value" id="coNewLtv">0%</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">New Monthly Payment</div>
+            <div class="rfc-tool-result-value" id="coNewPayment">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">Payment Change</div>
+            <div class="rfc-tool-result-value" id="coPaymentChange">$0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rfc-tool-chart-area" id="coChartArea" style="display:none;">
+        <h4 style="margin-bottom:16px;">Equity Breakdown</h4>
+        <canvas id="coChart" width="400" height="250"></canvas>
+      </div>
+    </div>
+
+    <div class="rfc-tool-history" id="coCompareBox" style="display:none;">
+      <h4>Scenario Comparison</h4>
+      <div id="coCompareList"></div>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_bottom">Advertisement</div>
+
+    <div style="margin-top:48px;">
+      <h3 class="rfc-h3">How It Works</h3>
+      <div class="rfc-article-body" style="margin-top:16px;">
+        <h4>Calculation Logic</h4>
+        <p>This calculator determines how much equity you can access through a cash-out refinance. It computes your available equity (home value minus current balance), then applies your lender's maximum LTV limit to find the maximum new loan amount. The cash you can take out is the difference between that max loan and your current balance. Your new monthly payment is calculated using the standard amortization formula.</p>
+        <h4>How to Use</h4>
+        <ul>
+          <li>Enter your current home value and remaining loan balance.</li>
+          <li>Set the maximum LTV your lender allows (commonly 80% for conventional loans).</li>
+          <li>Input your new rate and desired term.</li>
+          <li>Enter the amount of cash you want to pull out.</li>
+          <li>Click <strong>Calculate</strong> to see available equity, max cash-out, new loan amount, and payment change.</li>
+        </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li><strong>Stay under 80% LTV if possible:</strong> Crossing above 80% usually triggers PMI, adding a monthly cost.</li>
+          <li><strong>Use Compare Scenarios:</strong> Test different cash amounts to see how each affects your payment.</li>
+          <li><strong>Consider a home equity loan:</strong> For smaller amounts, a HELOC might have lower total costs. Read our article on the topic.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div style="margin-top:48px;">
+      <div class="rfc-ad-slot has-content" id="tool_detail_middle">Advertisement</div>
+
+    <h3 class="rfc-h3">Related Articles</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="../blog/cash-out-refinance-vs-home-equity.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Cash-Out vs. Home Equity Loan</div>
+            <div class="rfc-article-card-excerpt">The smart borrower's guide to accessing equity.</div>
+          </div>
+        </a>
+        <a href="../blog/ltv-explained-equity.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">LTV Explained</div>
+            <div class="rfc-article-card-excerpt">Why your equity percentage changes everything.</div>
+          </div>
+        </a>
+        <a href="../blog/pmi-refinancing-when-drop-it.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">PMI and Refinancing</div>
+            <div class="rfc-article-card-excerpt">When you can finally drop PMI.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="rfc-footer">
+  <div class="rfc-footer-inner">
+    <div class="rfc-footer-grid">
+      <div>
+        <div class="rfc-footer-brand">Refinance<span>Calc</span>Tool</div>
+        <p class="rfc-footer-desc">Smart mortgage refinance calculators and expert guidance.</p>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Tools</div>
+        <ul class="rfc-footer-links">
+          <li><a href="./refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="./break-even-calculator.html">Break-Even Calculator</a></li>
+          <li><a href="./closing-cost-estimator.html">Closing Cost Estimator</a></li>
+          <li><a href="./cash-out-calculator.html">Cash-Out Calculator</a></li>
+          <li><a href="./rate-comparison.html">Rate Comparison</a></li>
+          <li><a href="./pmi-calculator.html">PMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Resources</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../faq.html">FAQ</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Legal</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+          <li><a href="../disclaimer.html">Disclaimer</a></li>
+          <li><a href="../disclosure.html">Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rfc-footer-bottom">
+      <span>&copy; 2026 Refinance Calc Tool. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+function calculateMonthlyPayment(principal, rate, years) {
+  const r = rate / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+}
+
+
+function rfcSaveCOState() {
+  var state = {
+    value: document.getElementById('coValue').value,
+    balance: document.getElementById('coBalance').value,
+    ltv: document.getElementById('coLtv').value,
+    rate: document.getElementById('coRate').value,
+    term: document.getElementById('coTerm').value,
+    want: document.getElementById('coWant').value
+  };
+  localStorage.setItem('rfcCOState', JSON.stringify(state));
+}
+
+function rfcLoadCOState() {
+  var state = JSON.parse(localStorage.getItem('rfcCOState') || '{}');
+  if (state.value !== undefined) document.getElementById('coValue').value = state.value;
+  if (state.balance !== undefined) document.getElementById('coBalance').value = state.balance;
+  if (state.ltv !== undefined) document.getElementById('coLtv').value = state.ltv;
+  if (state.rate !== undefined) document.getElementById('coRate').value = state.rate;
+  if (state.term !== undefined) document.getElementById('coTerm').value = state.term;
+  if (state.want !== undefined) document.getElementById('coWant').value = state.want;
+}
+function calcCashOut() {
+  rfcSaveCOState();
+  const value = parseFloat(document.getElementById('coValue').value) || 0;
+  const balance = parseFloat(document.getElementById('coBalance').value) || 0;
+  const maxLtv = parseFloat(document.getElementById('coLtv').value) || 80;
+  const rate = parseFloat(document.getElementById('coRate').value) || 0;
+  const term = parseFloat(document.getElementById('coTerm').value) || 30;
+  const want = parseFloat(document.getElementById('coWant').value) || 0;
+
+  const equity = value - balance;
+  const maxLoan = value * (maxLtv / 100);
+  const maxCash = maxLoan - balance;
+  const newLoan = balance + want;
+  const newLtv = (newLoan / value) * 100;
+  const newPayment = calculateMonthlyPayment(newLoan, rate, term);
+  const oldPayment = calculateMonthlyPayment(balance, rate, term);
+  const paymentChange = newPayment - oldPayment;
+
+  document.getElementById('coEquity').textContent = '$' + equity.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('coMaxCash').textContent = '$' + maxCash.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('coNewLoan').textContent = '$' + newLoan.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('coNewLtv').textContent = newLtv.toFixed(1) + '%';
+  document.getElementById('coNewPayment').textContent = '$' + newPayment.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('coPaymentChange').textContent = (paymentChange >= 0 ? '+$' : '-$') + Math.abs(paymentChange).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('coPaymentChange').style.color = paymentChange >= 0 ? 'var(--rfc-danger)' : 'var(--rfc-success)';
+
+  document.getElementById('coResult').style.display = 'block';
+  document.getElementById('coChartArea').style.display = 'block';
+
+  drawCoChart(equity, maxCash, want, balance);
+}
+
+function drawCoChart(equity, maxCash, want, balance) {
+  const canvas = document.getElementById('coChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const data = [
+    {label: 'Remaining Balance', value: balance, color: '#1a5f7a'},
+    {label: 'Cash-Out', value: want, color: '#e76f51'},
+    {label: 'Retained Equity', value: equity - maxCash, color: '#e9c46a'}
+  ];
+
+  const total = data.reduce((a, b) => a + b.value, 0);
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const radius = 90;
+  let startAngle = -Math.PI / 2;
+
+  data.forEach(d => {
+    if (d.value <= 0) return;
+    const slice = (d.value / total) * 2 * Math.PI;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, radius, startAngle, startAngle + slice);
+    ctx.closePath();
+    ctx.fillStyle = d.color;
+    ctx.fill();
+    startAngle += slice;
+  });
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, 40, 0, 2 * Math.PI);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  ctx.fillStyle = '#2d3436';
+  ctx.font = 'bold 12px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Home Value', cx, cy - 5);
+  ctx.fillText('$' + (total/1000).toFixed(0) + 'k', cx, cy + 10);
+}
+
+let coScenarios = [];
+function compareCashOut() {
+  calcCashOut();
+  const value = document.getElementById('coValue').value;
+  const want = document.getElementById('coWant').value;
+  const newPayment = document.getElementById('coNewPayment').textContent;
+  const newLtv = document.getElementById('coNewLtv').textContent;
+
+  coScenarios.push({value, want, payment: newPayment, ltv: newLtv});
+  if (coScenarios.length > 5) coScenarios.shift();
+
+  const box = document.getElementById('coCompareBox');
+  const list = document.getElementById('coCompareList');
+  box.style.display = 'block';
+  list.innerHTML = '<table style="width:100%;font-size:0.875rem;"><tr style="border-bottom:2px solid var(--rfc-border);"><th>Home Value</th><th>Cash Out</th><th>New Payment</th><th>LTV</th></tr>' +
+    coScenarios.map(s => '<tr style="border-bottom:1px solid var(--rfc-border-light);"><td>$' + s.value + '</td><td>$' + s.want + '</td><td>' + s.payment + '</td><td>' + s.ltv + '</td></tr>').join('') +
+    '</table>';
+}
+
+function resetCashOut() {
+  localStorage.removeItem('rfcCOState');
+  document.getElementById('coValue').value = '450000';
+  document.getElementById('coBalance').value = '300000';
+  document.getElementById('coLtv').value = '80';
+  document.getElementById('coRate').value = '6.2';
+  document.getElementById('coTerm').value = '30';
+  document.getElementById('coWant').value = '50000';
+  document.getElementById('coResult').style.display = 'none';
+  document.getElementById('coChartArea').style.display = 'none';
+  document.getElementById('coCompareBox').style.display = 'none';
+  coScenarios = [];
+}
+rfcLoadCOState();
+</script>
+</body>
+</html>
