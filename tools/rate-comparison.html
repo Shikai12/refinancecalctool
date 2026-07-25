@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://refinancecalctool.org/tools/rate-comparison.html">
+<link rel="stylesheet" href="../style.css">
+<title>Rate Comparison | Refinance Calc Tool</title>
+<meta name="description" content="Compare fixed rate vs. ARM refinance options side by side. See payment scenarios, rate risk, and lifetime cost differences.">
+<meta property="og:title" content="Rate Comparison | Refinance Calc Tool">
+<meta property="og:description" content="Compare fixed rate vs. ARM refinance options side by side.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refinancecalctool.org/tools/rate-comparison.html">
+<meta property="og:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rate Comparison | Refinance Calc Tool">
+<meta name="twitter:description" content="Compare fixed rate vs. ARM refinance options side by side.">
+<meta name="twitter:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Rate Comparison",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://refinancecalctool.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://refinancecalctool.org/tools/index.html"},
+    {"@type": "ListItem", "position": 3, "name": "Rate Comparison", "item": "https://refinancecalctool.org/tools/rate-comparison.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="rfc-nav">
+  <div class="rfc-nav-inner">
+    <a href="../index.html" class="rfc-nav-logo">Refinance<span>Calc</span>Tool</a>
+    <button class="rfc-nav-toggle" onclick="document.querySelector('.rfc-nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="rfc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html" class="active">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="rfc-section">
+  <div class="rfc-container">
+    <div class="rfc-breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <a href="./index.html">Tools</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <span>Rate Comparison</span>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_top">Advertisement</div>
+
+    <h1 class="rfc-h1" style="margin-bottom:8px;">Rate Comparison</h1>
+    <p class="rfc-lead" style="margin-bottom:32px;">Fixed rate vs. ARM: see the numbers for every scenario over 5, 10, and 15 years.</p>
+
+    <div class="rfc-tool-page">
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;">
+        <div class="rfc-tool-input-group">
+          <label>Loan Amount ($)</label>
+          <input type="number" id="rcLoan" placeholder="300000" value="300000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Fixed Rate (%)</label>
+          <input type="number" id="rcFixed" placeholder="6.2" value="6.2" step="0.01">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>ARM Initial Rate (%)</label>
+          <input type="number" id="rcArmInitial" placeholder="5.5" value="5.5" step="0.01">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>ARM Adjusted Rate (%)</label>
+          <input type="number" id="rcArmAdjusted" placeholder="7.5" value="7.5" step="0.01">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Fixed Term (Years)</label>
+          <select id="rcFixedTerm">
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30" selected>30</option>
+          </select>
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>ARM Fixed Period (Years)</label>
+          <select id="rcArmFixed">
+            <option value="5">5/1 ARM</option>
+            <option value="7">7/1 ARM</option>
+            <option value="10">10/1 ARM</option>
+          </select>
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>ARM Total Term (Years)</label>
+          <select id="rcArmTerm">
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30" selected>30</option>
+          </select>
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Years to Compare</label>
+          <select id="rcCompareYears">
+            <option value="5">5 Years</option>
+            <option value="10">10 Years</option>
+            <option value="15" selected>15 Years</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rfc-tool-actions">
+        <button class="rfc-btn rfc-btn-primary" onclick="calcRateCompare()">Compare</button>
+        <button class="rfc-btn rfc-btn-outline" onclick="resetRateCompare()">Reset</button>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+      <div class="rfc-tool-result-box" id="rcResult" style="display:none;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:var(--rfc-bg-alt);padding:16px;border-radius:8px;">
+            <div style="font-size:0.875rem;color:var(--rfc-text-muted);margin-bottom:4px;">Fixed Rate Payment</div>
+            <div style="font-size:1.5rem;font-weight:700;color:var(--rfc-primary);" id="rcFixedPayment">$0</div>
+          </div>
+          <div style="background:var(--rfc-bg-alt);padding:16px;border-radius:8px;">
+            <div style="font-size:0.875rem;color:var(--rfc-text-muted);margin-bottom:4px;">ARM Avg Payment</div>
+            <div style="font-size:1.5rem;font-weight:700;color:var(--rfc-accent);" id="rcArmPayment">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">Fixed Total Cost</div>
+            <div class="rfc-tool-result-value" id="rcFixedTotal">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">ARM Total Cost</div>
+            <div class="rfc-tool-result-value" id="rcArmTotal">$0</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">Winner</div>
+            <div class="rfc-tool-result-value" id="rcWinner" style="color:var(--rfc-success);">-</div>
+          </div>
+          <div>
+            <div class="rfc-tool-result-label">Difference</div>
+            <div class="rfc-tool-result-value" id="rcDiff">$0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rfc-tool-chart-area" id="rcChartArea" style="display:none;">
+        <h4 style="margin-bottom:16px;">Payment Over Time</h4>
+        <canvas id="rcChart" width="400" height="250"></canvas>
+      </div>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_bottom">Advertisement</div>
+
+    <div style="margin-top:48px;">
+      <h3 class="rfc-h3">How It Works</h3>
+      <div class="rfc-article-body" style="margin-top:16px;">
+        <h4>Calculation Logic</h4>
+        <p>This tool compares two loan structures side by side: a fixed-rate loan with a constant payment, and an ARM with an initial low-rate period followed by a higher adjusted rate. It calculates the monthly payment for each phase, then multiplies by the number of months to produce a total cost over your chosen comparison period. The payment-over-time chart shows exactly where the ARM payment jumps.</p>
+        <h4>How to Use</h4>
+        <ul>
+          <li>Enter your loan amount.</li>
+          <li>Input the fixed rate and the ARM's initial and adjusted rates.</li>
+          <li>Select the ARM's fixed period (5/1, 7/1, or 10/1) and the total term for both loans.</li>
+          <li>Choose how many years you want to compare (5, 10, or 15).</li>
+          <li>Click <strong>Compare</strong> to see total cost, winner, and payment chart.</li>
+        </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li><strong>Short-timers win with ARMs:</strong> If you plan to sell or refinance within 5–7 years, an ARM often costs less.</li>
+          <li><strong>Watch the adjusted rate:</strong> The "worst case" ARM rate is what matters most. Make sure you can afford it if you stay longer.</li>
+          <li><strong>Rate caps matter:</strong> Real ARMs have annual and lifetime caps. This calculator uses your entered adjusted rate as a simplified model.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div style="margin-top:48px;">
+      <div class="rfc-ad-slot has-content" id="tool_detail_middle">Advertisement</div>
+
+    <h3 class="rfc-h3">Related Articles</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="../blog/fixed-rate-vs-arm-refinance.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Fixed Rate vs. ARM</div>
+            <div class="rfc-article-card-excerpt">Which refinance option fits your life stage?</div>
+          </div>
+        </a>
+        <a href="../blog/rate-lock-strategy-volatile-market.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Rate Lock Strategy</div>
+            <div class="rfc-article-card-excerpt">When to pull the trigger in a volatile market.</div>
+          </div>
+        </a>
+        <a href="../blog/2026-mortgage-rate-forecast.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">2026 Mortgage Rate Forecast</div>
+            <div class="rfc-article-card-excerpt">What the Fed and Iran mean for your loan.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="rfc-footer">
+  <div class="rfc-footer-inner">
+    <div class="rfc-footer-grid">
+      <div>
+        <div class="rfc-footer-brand">Refinance<span>Calc</span>Tool</div>
+        <p class="rfc-footer-desc">Smart mortgage refinance calculators and expert guidance.</p>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Tools</div>
+        <ul class="rfc-footer-links">
+          <li><a href="./refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="./break-even-calculator.html">Break-Even Calculator</a></li>
+          <li><a href="./closing-cost-estimator.html">Closing Cost Estimator</a></li>
+          <li><a href="./cash-out-calculator.html">Cash-Out Calculator</a></li>
+          <li><a href="./rate-comparison.html">Rate Comparison</a></li>
+          <li><a href="./pmi-calculator.html">PMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Resources</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../faq.html">FAQ</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Legal</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+          <li><a href="../disclaimer.html">Disclaimer</a></li>
+          <li><a href="../disclosure.html">Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rfc-footer-bottom">
+      <span>&copy; 2026 Refinance Calc Tool. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+
+function rfcSaveRateState() {
+  var state = {
+    loan: document.getElementById('rcLoan').value,
+    fixed: document.getElementById('rcFixed').value,
+    armInitial: document.getElementById('rcArmInitial').value,
+    armAdjusted: document.getElementById('rcArmAdjusted').value,
+    fixedTerm: document.getElementById('rcFixedTerm').value,
+    armFixed: document.getElementById('rcArmFixed').value,
+    armTerm: document.getElementById('rcArmTerm').value,
+    compareYears: document.getElementById('rcCompareYears').value
+  };
+  localStorage.setItem('rfcRateState', JSON.stringify(state));
+}
+
+function rfcLoadRateState() {
+  var state = JSON.parse(localStorage.getItem('rfcRateState') || '{}');
+  if (state.loan !== undefined) document.getElementById('rcLoan').value = state.loan;
+  if (state.fixed !== undefined) document.getElementById('rcFixed').value = state.fixed;
+  if (state.armInitial !== undefined) document.getElementById('rcArmInitial').value = state.armInitial;
+  if (state.armAdjusted !== undefined) document.getElementById('rcArmAdjusted').value = state.armAdjusted;
+  if (state.fixedTerm !== undefined) document.getElementById('rcFixedTerm').value = state.fixedTerm;
+  if (state.armFixed !== undefined) document.getElementById('rcArmFixed').value = state.armFixed;
+  if (state.armTerm !== undefined) document.getElementById('rcArmTerm').value = state.armTerm;
+  if (state.compareYears !== undefined) document.getElementById('rcCompareYears').value = state.compareYears;
+}
+function calculateMonthlyPayment(principal, rate, years) {
+  const r = rate / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+}
+
+function calcRateCompare() {
+  rfcSaveRateState();
+  const loan = parseFloat(document.getElementById('rcLoan').value) || 0;
+  const fixedRate = parseFloat(document.getElementById('rcFixed').value) || 0;
+  const armInitial = parseFloat(document.getElementById('rcArmInitial').value) || 0;
+  const armAdjusted = parseFloat(document.getElementById('rcArmAdjusted').value) || 0;
+  const fixedTerm = parseFloat(document.getElementById('rcFixedTerm').value) || 30;
+  const armFixed = parseFloat(document.getElementById('rcArmFixed').value) || 5;
+  const armTerm = parseFloat(document.getElementById('rcArmTerm').value) || 30;
+  const compareYears = parseFloat(document.getElementById('rcCompareYears').value) || 15;
+
+  const fixedPayment = calculateMonthlyPayment(loan, fixedRate, fixedTerm);
+  const armInitialPayment = calculateMonthlyPayment(loan, armInitial, armTerm);
+  const armAdjustedPayment = calculateMonthlyPayment(loan, armAdjusted, armTerm);
+
+  const months = compareYears * 12;
+  const fixedMonths = Math.min(months, fixedTerm * 12);
+  const fixedTotal = fixedPayment * fixedMonths;
+
+  let armTotal = 0;
+  const armInitialMonths = Math.min(armFixed * 12, months);
+  const armAdjustedMonths = months - armInitialMonths;
+  armTotal = armInitialPayment * armInitialMonths + armAdjustedPayment * armAdjustedMonths;
+
+  const avgArmPayment = armTotal / months;
+  const diff = Math.abs(fixedTotal - armTotal);
+  const winner = fixedTotal < armTotal ? 'Fixed Rate' : 'ARM';
+
+  document.getElementById('rcFixedPayment').textContent = '$' + fixedPayment.toFixed(0);
+  document.getElementById('rcArmPayment').textContent = '$' + avgArmPayment.toFixed(0);
+  document.getElementById('rcFixedTotal').textContent = '$' + fixedTotal.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('rcArmTotal').textContent = '$' + armTotal.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('rcWinner').textContent = winner;
+  document.getElementById('rcWinner').style.color = winner === 'Fixed Rate' ? 'var(--rfc-primary)' : 'var(--rfc-accent)';
+  document.getElementById('rcDiff').textContent = '$' + diff.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  document.getElementById('rcResult').style.display = 'block';
+  document.getElementById('rcChartArea').style.display = 'block';
+
+  drawRcChart(fixedPayment, armInitialPayment, armAdjustedPayment, armFixed, compareYears);
+}
+
+function drawRcChart(fixedPayment, armInitial, armAdjusted, armFixedYears, totalYears) {
+  const canvas = document.getElementById('rcChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const pad = 40;
+  const w = canvas.width - pad * 2;
+  const h = canvas.height - pad * 2;
+  const maxPay = Math.max(fixedPayment, armInitial, armAdjusted) * 1.2;
+
+  // Axes
+  ctx.strokeStyle = '#dfe6e9';
+  ctx.beginPath();
+  ctx.moveTo(pad, pad);
+  ctx.lineTo(pad, canvas.height - pad);
+  ctx.lineTo(canvas.width - pad, canvas.height - pad);
+  ctx.stroke();
+
+  // Fixed line (flat)
+  ctx.strokeStyle = '#1a5f7a';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(pad, canvas.height - pad - (fixedPayment / maxPay) * h);
+  ctx.lineTo(canvas.width - pad, canvas.height - pad - (fixedPayment / maxPay) * h);
+  ctx.stroke();
+  ctx.fillStyle = '#1a5f7a';
+  ctx.fillText('Fixed', canvas.width - pad - 40, canvas.height - pad - (fixedPayment / maxPay) * h - 10);
+
+  // ARM line (step)
+  const splitX = pad + (armFixedYears / totalYears) * w;
+  ctx.strokeStyle = '#e76f51';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(pad, canvas.height - pad - (armInitial / maxPay) * h);
+  ctx.lineTo(splitX, canvas.height - pad - (armInitial / maxPay) * h);
+  ctx.lineTo(splitX, canvas.height - pad - (armAdjusted / maxPay) * h);
+  ctx.lineTo(canvas.width - pad, canvas.height - pad - (armAdjusted / maxPay) * h);
+  ctx.stroke();
+  ctx.fillStyle = '#e76f51';
+  ctx.fillText('ARM', canvas.width - pad - 30, canvas.height - pad - (armAdjusted / maxPay) * h - 10);
+
+  // Labels
+  ctx.fillStyle = '#636e72';
+  ctx.font = '11px sans-serif';
+  ctx.fillText('0', pad - 15, canvas.height - pad + 15);
+  ctx.fillText(totalYears + ' yrs', canvas.width - pad - 30, canvas.height - pad + 15);
+}
+
+function resetRateCompare() {
+  localStorage.removeItem('rfcRateState');
+  document.getElementById('rcLoan').value = '300000';
+  document.getElementById('rcFixed').value = '6.2';
+  document.getElementById('rcArmInitial').value = '5.5';
+  document.getElementById('rcArmAdjusted').value = '7.5';
+  document.getElementById('rcFixedTerm').value = '30';
+  document.getElementById('rcArmFixed').value = '5';
+  document.getElementById('rcArmTerm').value = '30';
+  document.getElementById('rcCompareYears').value = '15';
+  document.getElementById('rcResult').style.display = 'none';
+  document.getElementById('rcChartArea').style.display = 'none';
+}
+rfcLoadRateState();
+</script>
+</body>
+</html>
