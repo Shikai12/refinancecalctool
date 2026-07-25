@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://refinancecalctool.org/tools/closing-cost-estimator.html">
+<link rel="stylesheet" href="../style.css">
+<title>Closing Cost Estimator | Refinance Calc Tool</title>
+<meta name="description" content="Estimate every closing cost before you refinance. Break down appraisal, title, origination, and recording fees instantly.">
+<meta property="og:title" content="Closing Cost Estimator | Refinance Calc Tool">
+<meta property="og:description" content="Estimate every closing cost before you refinance. Break down fees instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refinancecalctool.org/tools/closing-cost-estimator.html">
+<meta property="og:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Closing Cost Estimator | Refinance Calc Tool">
+<meta name="twitter:description" content="Estimate every closing cost before you refinance.">
+<meta name="twitter:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Closing Cost Estimator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://refinancecalctool.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://refinancecalctool.org/tools/index.html"},
+    {"@type": "ListItem", "position": 3, "name": "Closing Cost Estimator", "item": "https://refinancecalctool.org/tools/closing-cost-estimator.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="rfc-nav">
+  <div class="rfc-nav-inner">
+    <a href="../index.html" class="rfc-nav-logo">Refinance<span>Calc</span>Tool</a>
+    <button class="rfc-nav-toggle" onclick="document.querySelector('.rfc-nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="rfc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html" class="active">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="rfc-section">
+  <div class="rfc-container">
+    <div class="rfc-breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <a href="./index.html">Tools</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <span>Closing Cost Estimator</span>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_top">Advertisement</div>
+
+    <h1 class="rfc-h1" style="margin-bottom:8px;">Closing Cost Estimator</h1>
+    <p class="rfc-lead" style="margin-bottom:32px;">Don't get surprised at the closing table. Estimate every fee before you apply.</p>
+
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:32px;">
+      <div>
+        <div class="rfc-tool-page">
+          <h3 class="rfc-h3" style="margin-bottom:24px;">Loan Details</h3>
+          <div class="rfc-tool-input-group">
+            <label>Loan Amount ($)</label>
+            <input type="number" id="ccLoanAmount" placeholder="300000" value="300000">
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Property State</label>
+            <select id="ccState">
+              <option value="0.01">Low-cost state (1%)</option>
+              <option value="0.02" selected>Typical state (2%)</option>
+              <option value="0.03">High-cost state (3%)</option>
+            </select>
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Loan Type</label>
+            <select id="ccLoanType">
+              <option value="conventional" selected>Conventional</option>
+              <option value="fha">FHA</option>
+              <option value="va">VA</option>
+            </select>
+          </div>
+
+          <h3 class="rfc-h3" style="margin:24px 0 16px;">Fee Breakdown</h3>
+          <div class="rfc-tool-input-group">
+            <label>Appraisal Fee ($)</label>
+            <input type="number" id="ccAppraisal" placeholder="500" value="500">
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Credit Report ($)</label>
+            <input type="number" id="ccCredit" placeholder="50" value="50">
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Title Insurance ($)</label>
+            <input type="number" id="ccTitle" placeholder="1200" value="1200">
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Origination Fee ($)</label>
+            <input type="number" id="ccOrigination" placeholder="1500" value="1500">
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Recording Fee ($)</label>
+            <input type="number" id="ccRecording" placeholder="250" value="250">
+          </div>
+          <div class="rfc-tool-input-group">
+            <label>Other Fees ($)</label>
+            <input type="number" id="ccOther" placeholder="500" value="500">
+          </div>
+
+          <div class="rfc-tool-actions">
+            <button class="rfc-btn rfc-btn-primary" onclick="calcClosingCosts()">Estimate Costs</button>
+            <button class="rfc-btn rfc-btn-outline" onclick="resetClosingCosts()">Reset</button>
+            <button class="rfc-btn rfc-btn-outline" onclick="exportClosingCosts()">Export</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="rfc-tool-result-box" id="ccResult" style="display:none;">
+          <div style="text-align:center;margin-bottom:24px;">
+            <div class="rfc-tool-result-label">Total Estimated Closing Costs</div>
+            <div class="rfc-tool-result-value" id="ccTotal" style="font-size:2.5rem;">$0</div>
+            <div style="font-size:0.875rem;color:var(--rfc-text-muted);margin-top:4px;" id="ccPercent">0% of loan</div>
+          </div>
+          <div id="ccBreakdown" style="font-size:0.9375rem;"></div>
+        </div>
+
+        <div class="rfc-tool-chart-area" id="ccChartArea" style="display:none;">
+          <h4 style="margin-bottom:16px;">Fee Distribution</h4>
+          <canvas id="ccChart" width="300" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_bottom">Advertisement</div>
+
+    <div style="margin-top:48px;">
+      <h3 class="rfc-h3">How It Works</h3>
+      <div class="rfc-article-body" style="margin-top:16px;">
+        <h4>Calculation Logic</h4>
+        <p>This tool sums every individual closing fee you enter to produce a total estimate. It also calculates what percentage of your loan amount that total represents, so you can quickly gauge whether your costs are in the normal 2%–5% range. The pie chart visualizes how much each fee category contributes to the total.</p>
+        <h4>How to Use</h4>
+        <ul>
+          <li>Enter your loan amount and select your state cost tier (low-cost states average ~1%, typical ~2%, high-cost ~3%).</li>
+          <li>Input each fee line item: appraisal, credit report, title insurance, origination, recording, and any other fees.</li>
+          <li>Click <strong>Estimate Costs</strong> to see the total and percentage of loan.</li>
+          <li>Use the <strong>Export</strong> button to save your estimate as a text file.</li>
+        </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li><strong>Title insurance is often the biggest line item:</strong> Shop around. Title rates can vary by hundreds of dollars.</li>
+          <li><strong>Ask for a lender credit:</strong> Many lenders will raise your rate slightly in exchange for covering some closing costs.</li>
+          <li><strong>Compare with our Refinance Calculator:</strong> Enter this total into the closing costs field there to see the full picture.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div style="margin-top:48px;">
+      <div class="rfc-ad-slot has-content" id="tool_detail_middle">Advertisement</div>
+
+    <h3 class="rfc-h3">Related Articles</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="../blog/closing-costs-decoded.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Closing Costs Decoded</div>
+            <div class="rfc-article-card-excerpt">Where every dollar goes in a refinance closing.</div>
+          </div>
+        </a>
+        <a href="../blog/no-closing-cost-refinance-math.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">No-Closing-Cost Refinance Math</div>
+            <div class="rfc-article-card-excerpt">The hidden math behind zero-fee offers.</div>
+          </div>
+        </a>
+        <a href="../blog/mark-saved-28000-refinancing.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">Mark's Refinance Story</div>
+            <div class="rfc-article-card-excerpt">How closing costs factored into a $28,000 decision.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="rfc-footer">
+  <div class="rfc-footer-inner">
+    <div class="rfc-footer-grid">
+      <div>
+        <div class="rfc-footer-brand">Refinance<span>Calc</span>Tool</div>
+        <p class="rfc-footer-desc">Smart mortgage refinance calculators and expert guidance.</p>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Tools</div>
+        <ul class="rfc-footer-links">
+          <li><a href="./refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="./break-even-calculator.html">Break-Even Calculator</a></li>
+          <li><a href="./closing-cost-estimator.html">Closing Cost Estimator</a></li>
+          <li><a href="./cash-out-calculator.html">Cash-Out Calculator</a></li>
+          <li><a href="./rate-comparison.html">Rate Comparison</a></li>
+          <li><a href="./pmi-calculator.html">PMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Resources</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../faq.html">FAQ</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Legal</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+          <li><a href="../disclaimer.html">Disclaimer</a></li>
+          <li><a href="../disclosure.html">Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rfc-footer-bottom">
+      <span>&copy; 2026 Refinance Calc Tool. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+
+function rfcSaveCCState() {
+  var state = {
+    loanAmount: document.getElementById('ccLoanAmount').value,
+    state: document.getElementById('ccState').value,
+    loanType: document.getElementById('ccLoanType').value,
+    appraisal: document.getElementById('ccAppraisal').value,
+    credit: document.getElementById('ccCredit').value,
+    title: document.getElementById('ccTitle').value,
+    origination: document.getElementById('ccOrigination').value,
+    recording: document.getElementById('ccRecording').value,
+    other: document.getElementById('ccOther').value
+  };
+  localStorage.setItem('rfcCCState', JSON.stringify(state));
+}
+
+function rfcLoadCCState() {
+  var state = JSON.parse(localStorage.getItem('rfcCCState') || '{}');
+  if (state.loanAmount !== undefined) document.getElementById('ccLoanAmount').value = state.loanAmount;
+  if (state.state !== undefined) document.getElementById('ccState').value = state.state;
+  if (state.loanType !== undefined) document.getElementById('ccLoanType').value = state.loanType;
+  if (state.appraisal !== undefined) document.getElementById('ccAppraisal').value = state.appraisal;
+  if (state.credit !== undefined) document.getElementById('ccCredit').value = state.credit;
+  if (state.title !== undefined) document.getElementById('ccTitle').value = state.title;
+  if (state.origination !== undefined) document.getElementById('ccOrigination').value = state.origination;
+  if (state.recording !== undefined) document.getElementById('ccRecording').value = state.recording;
+  if (state.other !== undefined) document.getElementById('ccOther').value = state.other;
+}
+function calcClosingCosts() {
+  rfcSaveCCState();
+  const loan = parseFloat(document.getElementById('ccLoanAmount').value) || 0;
+  const stateRate = parseFloat(document.getElementById('ccState').value) || 0.02;
+  const appraisal = parseFloat(document.getElementById('ccAppraisal').value) || 0;
+  const credit = parseFloat(document.getElementById('ccCredit').value) || 0;
+  const title = parseFloat(document.getElementById('ccTitle').value) || 0;
+  const origination = parseFloat(document.getElementById('ccOrigination').value) || 0;
+  const recording = parseFloat(document.getElementById('ccRecording').value) || 0;
+  const other = parseFloat(document.getElementById('ccOther').value) || 0;
+
+  const total = appraisal + credit + title + origination + recording + other;
+  const percent = ((total / loan) * 100).toFixed(2);
+
+  document.getElementById('ccTotal').textContent = '$' + total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('ccPercent').textContent = percent + '% of loan amount';
+  document.getElementById('ccResult').style.display = 'block';
+  document.getElementById('ccChartArea').style.display = 'block';
+
+  const breakdown = [
+    {name: 'Appraisal', value: appraisal, color: '#1a5f7a'},
+    {name: 'Credit Report', value: credit, color: '#2a7f9e'},
+    {name: 'Title Insurance', value: title, color: '#e76f51'},
+    {name: 'Origination', value: origination, color: '#f4a261'},
+    {name: 'Recording', value: recording, color: '#e9c46a'},
+    {name: 'Other', value: other, color: '#b2bec3'}
+  ];
+
+  let html = '';
+  breakdown.forEach(item => {
+    const pct = total > 0 ? ((item.value / total) * 100).toFixed(1) : 0;
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--rfc-border-light);">';
+    html += '<span style="display:flex;align-items:center;gap:8px;"><span style="width:10px;height:10px;border-radius:2px;background:' + item.color + ';"></span>' + item.name + '</span>';
+    html += '<span><strong>$' + item.value.toFixed(0) + '</strong> (' + pct + '%)</span></div>';
+  });
+  document.getElementById('ccBreakdown').innerHTML = html;
+
+  drawPieChart(breakdown, total);
+}
+
+function drawPieChart(data, total) {
+  const canvas = document.getElementById('ccChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const radius = 100;
+  let startAngle = -Math.PI / 2;
+
+  data.forEach(item => {
+    if (item.value <= 0) return;
+    const slice = (item.value / total) * 2 * Math.PI;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, radius, startAngle, startAngle + slice);
+    ctx.closePath();
+    ctx.fillStyle = item.color;
+    ctx.fill();
+    startAngle += slice;
+  });
+
+  // Donut hole
+  ctx.beginPath();
+  ctx.arc(cx, cy, 50, 0, 2 * Math.PI);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  ctx.fillStyle = '#2d3436';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('$' + (total/1000).toFixed(1) + 'k', cx, cy + 5);
+}
+
+function resetClosingCosts() {
+  localStorage.removeItem('rfcCCState');
+  document.getElementById('ccLoanAmount').value = '300000';
+  document.getElementById('ccState').value = '0.02';
+  document.getElementById('ccLoanType').value = 'conventional';
+  document.getElementById('ccAppraisal').value = '500';
+  document.getElementById('ccCredit').value = '50';
+  document.getElementById('ccTitle').value = '1200';
+  document.getElementById('ccOrigination').value = '1500';
+  document.getElementById('ccRecording').value = '250';
+  document.getElementById('ccOther').value = '500';
+  document.getElementById('ccResult').style.display = 'none';
+  document.getElementById('ccChartArea').style.display = 'none';
+}
+
+function exportClosingCosts() {
+  const loan = document.getElementById('ccLoanAmount').value;
+  const total = document.getElementById('ccTotal').textContent;
+  const text = `Closing Cost Estimate
+Loan Amount: $${loan}
+Total Costs: ${total}
+
+Generated by refinancecalctool.org`;
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'closing-cost-estimate.txt';
+  a.click();
+}
+rfcLoadCCState();
+</script>
+</body>
+</html>
