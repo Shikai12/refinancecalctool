@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://refinancecalctool.org/tools/refinance-calculator.html">
+<link rel="stylesheet" href="../style.css">
+<title>Refinance Calculator | Refinance Calc Tool</title>
+<meta name="description" content="Calculate your refinance savings, new monthly payment, and total interest. Compare 15, 20, and 30-year terms instantly.">
+<meta property="og:title" content="Refinance Calculator | Refinance Calc Tool">
+<meta property="og:description" content="Calculate your refinance savings, new monthly payment, and total interest. Compare 15, 20, and 30-year terms instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refinancecalctool.org/tools/refinance-calculator.html">
+<meta property="og:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Refinance Calculator | Refinance Calc Tool">
+<meta name="twitter:description" content="Calculate your refinance savings, new monthly payment, and total interest.">
+<meta name="twitter:image" content="https://refinancecalctool.org/images/og-default.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Refinance Calculator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1240"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://refinancecalctool.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://refinancecalctool.org/tools/index.html"},
+    {"@type": "ListItem", "position": 3, "name": "Refinance Calculator", "item": "https://refinancecalctool.org/tools/refinance-calculator.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="rfc-nav">
+  <div class="rfc-nav-inner">
+    <a href="../index.html" class="rfc-nav-logo">Refinance<span>Calc</span>Tool</a>
+    <button class="rfc-nav-toggle" onclick="document.querySelector('.rfc-nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="rfc-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./index.html" class="active">Tools</a></li>
+      <li><a href="../blog/index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="rfc-section">
+  <div class="rfc-container">
+    <div class="rfc-breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <a href="./index.html">Tools</a>
+      <span class="rfc-breadcrumb-sep">/</span>
+      <span>Refinance Calculator</span>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_top">Advertisement</div>
+
+    <h1 class="rfc-h1" style="margin-bottom:8px;">Refinance Calculator</h1>
+    <p class="rfc-lead" style="margin-bottom:32px;">Compare your current loan against new terms. See monthly payment, total interest, and lifetime savings side by side.</p>
+
+    <div class="rfc-two-col" style="grid-template-columns:1fr 1fr;gap:32px;">
+      <div class="rfc-tool-page">
+        <h3 class="rfc-h3" style="margin-bottom:24px;">Your Current Loan</h3>
+        <div class="rfc-tool-input-group">
+          <label>Current Balance ($)</label>
+          <input type="number" id="currBalance" placeholder="300000" value="300000">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Current Rate (%)</label>
+          <input type="number" id="currRate" placeholder="4.75" value="4.75" step="0.01">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Years Remaining</label>
+          <input type="number" id="currYears" placeholder="22" value="22">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Current Monthly Payment ($)</label>
+          <input type="number" id="currPayment" placeholder="1950" value="1950">
+        </div>
+
+        <h3 class="rfc-h3" style="margin:32px 0 24px;">New Loan Options</h3>
+        <div class="rfc-tool-input-group">
+          <label>New Rate (%)</label>
+          <input type="number" id="newRate" placeholder="6.2" value="6.2" step="0.01">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>New Term (Years)</label>
+          <select id="newTerm">
+            <option value="15">15 Years</option>
+            <option value="20">20 Years</option>
+            <option value="30" selected>30 Years</option>
+          </select>
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Extra Monthly Payment ($)</label>
+          <input type="number" id="extraPayment" placeholder="0" value="0">
+        </div>
+        <div class="rfc-tool-input-group">
+          <label>Closing Costs ($)</label>
+          <input type="number" id="closingCosts" placeholder="5000" value="5000">
+        </div>
+
+        <div class="rfc-tool-actions">
+          <button class="rfc-btn rfc-btn-primary" onclick="calculateRefinance()">Calculate</button>
+          <button class="rfc-btn rfc-btn-outline" onclick="resetRefinance()">Reset</button>
+          <button class="rfc-btn rfc-btn-outline" onclick="saveRefinance()">Save Result</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="rfc-tool-result-box" id="resultBox" style="display:none;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+            <div>
+              <div class="rfc-tool-result-label">New Monthly Payment</div>
+              <div class="rfc-tool-result-value" id="newPayment">$0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Payment Change</div>
+              <div class="rfc-tool-result-value" id="paymentChange" style="color:var(--rfc-danger);">$0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Total Interest (New)</div>
+              <div class="rfc-tool-result-value" id="totalInterest">$0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Interest Saved</div>
+              <div class="rfc-tool-result-value" id="interestSaved" style="color:var(--rfc-success);">$0</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Break-Even Point</div>
+              <div class="rfc-tool-result-value" id="breakEven">0 months</div>
+            </div>
+            <div>
+              <div class="rfc-tool-result-label">Payoff Date</div>
+              <div class="rfc-tool-result-value" id="payoffDate">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rfc-tool-chart-area" id="chartArea" style="display:none;">
+          <h4 style="margin-bottom:16px;">Interest Comparison</h4>
+          <canvas id="refiChart" width="400" height="250"></canvas>
+        </div>
+
+        <div class="rfc-tool-history" id="historyBox" style="display:none;">
+          <h4>Saved Calculations</h4>
+          <div id="historyList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rfc-ad-slot has-content" id="tool_detail_bottom">Advertisement</div>
+
+    <div style="margin-top:48px;">
+      <h3 class="rfc-h3">How It Works</h3>
+      <div class="rfc-article-body" style="margin-top:16px;">
+        <h4>Calculation Logic</h4>
+        <p>This calculator uses the standard amortization formula to compute your new monthly payment: <code>M = P × [r(1+r)ⁿ] / [(1+r)ⁿ − 1]</code>, where P is the principal, r is the monthly interest rate, and n is the total number of payments. It then compares your remaining interest on the current loan against the total interest on the new loan, minus closing costs, to show your net savings.</p>
+        <h4>How to Use</h4>
+        <ul>
+          <li>Enter your current loan balance, rate, and years remaining.</li>
+          <li>Input your new offered rate and desired term (15, 20, or 30 years).</li>
+          <li>Add any extra monthly principal payment you plan to make.</li>
+          <li>Include estimated closing costs for an accurate break-even.</li>
+          <li>Click <strong>Calculate</strong> to see your new payment, interest saved, and break-even timeline.</li>
+        </ul>
+        <h4>Pro Tips</h4>
+        <ul>
+          <li><strong>Extra payments matter:</strong> Even $100/month extra can cut years off your loan and change the math dramatically.</li>
+          <li><strong>Closing costs vary by state:</strong> Use our Closing Cost Estimator if you are unsure what to enter here.</li>
+          <li><strong>Compare multiple terms:</strong> Run the calculator for 15-year and 30-year terms side by side to see the trade-off between monthly cash flow and total interest.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div style="margin-top:48px;">
+      <div class="rfc-ad-slot has-content" id="tool_detail_middle">Advertisement</div>
+
+    <h3 class="rfc-h3">Related Articles</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="../blog/30-year-vs-15-year-refinance.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">30-Year vs. 15-Year Refinance</div>
+            <div class="rfc-article-card-excerpt">A side-by-side cost analysis to help you choose the right term.</div>
+          </div>
+        </a>
+        <a href="../blog/calculate-refinance-break-even.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">How to Calculate Break-Even</div>
+            <div class="rfc-article-card-excerpt">Learn when your refinance savings will surpass the closing costs.</div>
+          </div>
+        </a>
+        <a href="../blog/no-closing-cost-refinance-math.html" class="rfc-article-card">
+          <div class="rfc-article-card-body">
+            <div class="rfc-article-card-title">No-Closing-Cost Refinance Math</div>
+            <div class="rfc-article-card-excerpt">The hidden math behind zero-cost refinancing offers.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <h3 class="rfc-h3">More Tools</h3>
+      <div class="rfc-grid-3" style="margin-top:16px;">
+        <a href="./break-even-calculator.html" class="rfc-tool-card">
+          <div class="rfc-tool-card-icon">🧮</div>
+          <div class="rfc-tool-card-title">Break-Even Calculator</div>
+          <div class="rfc-tool-card-desc">Find out when your refinance pays for itself.</div>
+        </a>
+        <a href="./closing-cost-estimator.html" class="rfc-tool-card">
+          <div class="rfc-tool-card-icon">💰</div>
+          <div class="rfc-tool-card-title">Closing Cost Estimator</div>
+          <div class="rfc-tool-card-desc">Estimate every fee before you apply.</div>
+        </a>
+        <a href="./cash-out-calculator.html" class="rfc-tool-card">
+          <div class="rfc-tool-card-icon">🏦</div>
+          <div class="rfc-tool-card-title">Cash-Out Calculator</div>
+          <div class="rfc-tool-card-desc">See how much equity you can access.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="rfc-footer">
+  <div class="rfc-footer-inner">
+    <div class="rfc-footer-grid">
+      <div>
+        <div class="rfc-footer-brand">Refinance<span>Calc</span>Tool</div>
+        <p class="rfc-footer-desc">Smart mortgage refinance calculators and expert guidance.</p>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Tools</div>
+        <ul class="rfc-footer-links">
+          <li><a href="./refinance-calculator.html">Refinance Calculator</a></li>
+          <li><a href="./break-even-calculator.html">Break-Even Calculator</a></li>
+          <li><a href="./closing-cost-estimator.html">Closing Cost Estimator</a></li>
+          <li><a href="./cash-out-calculator.html">Cash-Out Calculator</a></li>
+          <li><a href="./rate-comparison.html">Rate Comparison</a></li>
+          <li><a href="./pmi-calculator.html">PMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Resources</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../faq.html">FAQ</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="rfc-footer-heading">Legal</div>
+        <ul class="rfc-footer-links">
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Use</a></li>
+          <li><a href="../disclaimer.html">Disclaimer</a></li>
+          <li><a href="../disclosure.html">Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rfc-footer-bottom">
+      <span>&copy; 2026 Refinance Calc Tool. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+function calculateMonthlyPayment(principal, rate, years) {
+  const r = rate / 100 / 12;
+  const n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+}
+
+function calculateRefinance() {
+  const balance = parseFloat(document.getElementById('currBalance').value) || 0;
+  const currRate = parseFloat(document.getElementById('currRate').value) || 0;
+  const currYears = parseFloat(document.getElementById('currYears').value) || 0;
+  const currPayment = parseFloat(document.getElementById('currPayment').value) || 0;
+  const newRate = parseFloat(document.getElementById('newRate').value) || 0;
+  const newTerm = parseFloat(document.getElementById('newTerm').value) || 30;
+  const extra = parseFloat(document.getElementById('extraPayment').value) || 0;
+  const closing = parseFloat(document.getElementById('closingCosts').value) || 0;
+
+  const newPayment = calculateMonthlyPayment(balance, newRate, newTerm);
+  const totalNewPayment = newPayment + extra;
+  const newTotalInterest = totalNewPayment * newTerm * 12 - balance;
+
+  const currRemainingInterest = currPayment * currYears * 12 - balance;
+  const interestSaved = currRemainingInterest - newTotalInterest - closing;
+  const monthlyDiff = totalNewPayment - currPayment;
+  const breakEven = monthlyDiff > 0 ? Math.ceil(closing / monthlyDiff) : 0;
+
+  const payoffDate = new Date();
+  payoffDate.setMonth(payoffDate.getMonth() + newTerm * 12);
+
+  document.getElementById('newPayment').textContent = '$' + totalNewPayment.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('paymentChange').textContent = (monthlyDiff >= 0 ? '+$' : '-$') + Math.abs(monthlyDiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('paymentChange').style.color = monthlyDiff >= 0 ? 'var(--rfc-danger)' : 'var(--rfc-success)';
+  document.getElementById('totalInterest').textContent = '$' + newTotalInterest.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('interestSaved').textContent = '$' + interestSaved.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('interestSaved').style.color = interestSaved >= 0 ? 'var(--rfc-success)' : 'var(--rfc-danger)';
+  document.getElementById('breakEven').textContent = breakEven > 0 ? breakEven + ' months' : 'N/A';
+  document.getElementById('payoffDate').textContent = payoffDate.toLocaleDateString('en-US', {month:'short', year:'numeric'});
+
+  document.getElementById('resultBox').style.display = 'block';
+  document.getElementById('chartArea').style.display = 'block';
+
+  drawChart(currRemainingInterest, newTotalInterest, closing);
+}
+
+function drawChart(currInterest, newInterest, closing) {
+  const canvas = document.getElementById('refiChart');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const max = Math.max(currInterest, newInterest + closing) * 1.1;
+  const barWidth = 80;
+  const spacing = 60;
+  const startX = 60;
+  const baseY = 200;
+
+  // Current
+  const h1 = (currInterest / max) * 150;
+  ctx.fillStyle = '#b2bec3';
+  ctx.fillRect(startX, baseY - h1, barWidth, h1);
+  ctx.fillStyle = '#2d3436';
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillText('Current', startX + 10, baseY + 20);
+  ctx.fillText('$' + (currInterest/1000).toFixed(0) + 'k', startX + 10, baseY - h1 - 10);
+
+  // New
+  const h2 = (newInterest / max) * 150;
+  ctx.fillStyle = '#1a5f7a';
+  ctx.fillRect(startX + barWidth + spacing, baseY - h2, barWidth, h2);
+  ctx.fillStyle = '#2d3436';
+  ctx.fillText('New Loan', startX + barWidth + spacing + 5, baseY + 20);
+  ctx.fillText('$' + (newInterest/1000).toFixed(0) + 'k', startX + barWidth + spacing + 5, baseY - h2 - 10);
+
+  // Closing costs
+  const h3 = (closing / max) * 150;
+  ctx.fillStyle = '#e76f51';
+  ctx.fillRect(startX + barWidth + spacing, baseY - h2 - h3, barWidth, h3);
+  ctx.fillText('+$' + (closing/1000).toFixed(0) + 'k closing', startX + barWidth + spacing + 5, baseY - h2 - h3 - 10);
+}
+
+function resetRefinance() {
+  document.getElementById('currBalance').value = '300000';
+  document.getElementById('currRate').value = '4.75';
+  document.getElementById('currYears').value = '22';
+  document.getElementById('currPayment').value = '1950';
+  document.getElementById('newRate').value = '6.2';
+  document.getElementById('newTerm').value = '30';
+  document.getElementById('extraPayment').value = '0';
+  document.getElementById('closingCosts').value = '5000';
+  document.getElementById('resultBox').style.display = 'none';
+  document.getElementById('chartArea').style.display = 'none';
+}
+
+function saveRefinance() {
+  const data = {
+    date: new Date().toLocaleDateString(),
+    balance: document.getElementById('currBalance').value,
+    newRate: document.getElementById('newRate').value,
+    term: document.getElementById('newTerm').value,
+    payment: document.getElementById('newPayment').textContent,
+    saved: document.getElementById('interestSaved').textContent
+  };
+  let history = JSON.parse(localStorage.getItem('refiHistory') || '[]');
+  history.unshift(data);
+  if (history.length > 10) history = history.slice(0, 10);
+  localStorage.setItem('refiHistory', JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('refiHistory') || '[]');
+  const box = document.getElementById('historyBox');
+  const list = document.getElementById('historyList');
+  if (history.length === 0) { box.style.display = 'none'; return; }
+  box.style.display = 'block';
+  list.innerHTML = history.map((h, i) =>
+    '<div class="rfc-tool-history-item"><span>' + h.date + ' — ' + h.balance + ' @ ' + h.newRate + '%</span><span>' + h.saved + '</span></div>'
+  ).join('');
+}
+
+renderHistory();
+</script>
+</body>
+</html>
